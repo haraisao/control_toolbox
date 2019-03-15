@@ -36,6 +36,15 @@
 
 #include <control_toolbox/dither.h>
 
+#ifdef WIN32
+#include <random>
+std:: default_random_engine generator;
+std::uniform_real_distribution<double> distr(0.0,1.0);
+double erand48(unsigned short X[3]){
+    return distr(generator);
+}
+#endif
+
 namespace control_toolbox {
 
 Dither::Dither() : amplitude_(0), has_saved_value_(false)
